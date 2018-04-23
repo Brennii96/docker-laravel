@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     php7.0-json \
     php7.0-readline \
     php7.0-sqlite3 \
-    php7.0-curl \
+#     php7.0-curl \
     libphp-phpmailer \
     zip \
     git \

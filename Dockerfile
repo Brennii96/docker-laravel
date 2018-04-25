@@ -10,19 +10,19 @@ RUN apt-get update && apt-get install -y \
     curl -sL https://deb.nodesource.com/setup_7.x | bash - \
  && echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list && \
     echo 'deb-src http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list && \
-    echo 'deb http://repo.mysql.com/apt/debian jessie mysql-5.7' >> /etc/apt/sources.list \
+    echo 'deb http://repo.mysql.com/apt/debian jessie mysql-8.0' >> /etc/apt/sources.list \
  && apt-get update && apt-get install -y --force-yes \
-    php7.0 \
-    php7.0-fpm \
-    php7.0-common \
-    php7.0-mysql \
-    php7.0-xml \
-    php7.0-mbstring \
-    php7.0-opcache \
-    php7.0-json \
-    php7.0-readline \
-    php7.0-sqlite3 \
-#     php7.0-curl \
+    php7.2 \
+    php7.2-fpm \
+    php7.2-common \
+    php7.2-mysql \
+    php7.2-xml \
+    php7.2-mbstring \
+    php7.2-opcache \
+    php7.2-json \
+    php7.2-readline \
+    php7.2-sqlite3 \
+    php7.2-curl \
     libphp-phpmailer \
     zip \
     git \
@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
     mysql -e "CREATE USER 'docker'@'localhost' IDENTIFIED BY 'docker';" && \
     mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'docker'@'localhost';" && \
     mysql -e "FLUSH PRIVILEGES;" \
- && sed -ie 's/listen = \/run\/php\/php7\.0-fpm\.sock/listen = \/var\/run\/php7\.0-fpm\.sock/g' /etc/php/7.0/fpm/pool.d/www.conf && \
+ && sed -ie 's/listen = \/run\/php\/php7\.2-fpm\.sock/listen = \/var\/run\/php7\.2-fpm\.sock/g' /etc/php/7.2/fpm/pool.d/www.conf && \
     sed -ie 's/;cgi\.fix_pathinfo=1/cgi\.fix_pathinfo=0/g' /etc/php/7.0/fpm/php.ini \
  && curl -O https://getcomposer.org/installer \
  && php installer && \

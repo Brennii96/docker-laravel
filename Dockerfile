@@ -44,6 +44,34 @@ RUN install-php-extensions \
     zlib \
 	zip
 
+# Install Node.js (latest LTS) and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    corepack enable && corepack prepare yarn@stable --activate
+
+# add additional extensions here:
+RUN install-php-extensions \
+	pdo_pgsql \
+	gd \
+	intl \
+    imap \
+    bcmath \
+    redis \
+    curl \
+    exif \
+    hash \
+    iconv \
+    json \
+    mbstring \
+    mysqli \
+    mysqlnd \
+    pcntl \
+    pcre \
+    xml \
+    libxml \
+    zlib \
+	zip
+
 ## Install PECL extensions
 RUN pecl install \
     memcached-3.2.0 \
@@ -68,9 +96,10 @@ RUN composer install \
     --no-interaction \
     --no-autoloader \
     --no-ansi \
-    --no-scripts \
-    --audit
+    --no-scripts
 
-EXPOSE 8000
+RUN composer global require phpunit/phpunit:^10 pestphp/pest:^2.0
+
+EXPOSE 8000 5173 9003 2019
 
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
